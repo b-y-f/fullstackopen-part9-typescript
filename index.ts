@@ -1,17 +1,18 @@
 import { calculateBmi } from './bmiCalculator';
 
-const express = require('express');
+import express,{ Request, Response } from 'express';
+
 
 const app = express();
 
-app.get('/', (_req: any, res: any) => {
+app.get('/', (_req: never, res: Response) => {
   res.send('Hello Full Stack!');
 });
 
-app.get('/bmi', (req:any, res:any) => {
+app.get('/bmi', (req:Request, res:Response) => {
   const { height, weight } = req.query;
 
-  const bmi = calculateBmi(height, weight);
+  const bmi = calculateBmi(Number(height), Number(weight));
 
   if (!height || !weight) {
     res.json({
