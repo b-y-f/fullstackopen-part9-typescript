@@ -8,7 +8,7 @@ interface Data {
     average: number
 }
 
-const calculateExercises = (excersice_hours: Array<number>, target: number): Data => {
+export const calculateExercises = (excersice_hours: Array<number>, target: number): Data => {
   const avgHours = excersice_hours.reduce((a, b) => a + b, 0) / excersice_hours.length;
 
   const diff = target - avgHours;
