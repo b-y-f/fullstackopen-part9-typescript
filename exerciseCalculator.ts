@@ -17,13 +17,17 @@ const calculateExercises = (excersice_hours: Array<number>, target: number): Dat
     const diff = target - avgHours
 
     let rating = 0
+    let desc = ''
 
     if (diff > 1) {
         rating = 1
+        desc = 'bad'
     } else if (diff <= 1 || diff >= -1){
         rating = 2
+        desc = 'not too bad but could be better'
     } else {
         rating = 3
+        desc = 'great'
     }
 
     return {
@@ -31,11 +35,14 @@ const calculateExercises = (excersice_hours: Array<number>, target: number): Dat
         trainingDays: excersice_hours.filter(h=>h !== 0).length,
         success: target < avgHours,
         rating: rating,
-        ratingDescription: 'bbbb',
+        ratingDescription: desc,
         target: target,
         average: avgHours
     }
+    
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+const target: number = Number(process.argv[2])
+const traningHours: Array<number> = process.argv.slice(3).map(arg=>Number(arg))
 
+console.log(calculateExercises(traningHours, target))
