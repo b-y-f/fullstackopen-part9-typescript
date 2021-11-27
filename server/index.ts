@@ -4,11 +4,14 @@ import bodyParser from 'body-parser';
 
 import express,{ Request, Response } from 'express';
 
-
-
+import cors from 'cors';
 
 const app = express();
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(cors());
 app.use(bodyParser.json());
+
 
 app.get('/', (_req: never, res: Response) => {
   res.send('Hello Full Stack!');
@@ -51,8 +54,8 @@ app.post('/exercises', (req:Request, res:Response) =>{
 
 app.get('/ping', (_req:Request, res: Response) => {
 
-  res.json({message: 'something'})
-})
+  res.json({message: 'something'});
+});
 
 
 
