@@ -1,6 +1,5 @@
 import { calculateBmi } from './bmiCalculator';
 import { calculateExercises } from './exerciseCalculator';
-import bodyParser from 'body-parser';
 import diagnoses from './routes/diagnoses';
 import patients from './routes/patients';
 
@@ -12,7 +11,7 @@ const app = express();
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 
 app.get('/', (_req: never, res: Response) => {

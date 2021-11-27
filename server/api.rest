@@ -5,3 +5,16 @@ content-type: application/json
   "daily_exercises": [1, 0, 2, 0, 3, 0, "2.5"],
   "target": 2.5
 }
+
+
+POST http://localhost:3002/api/patients HTTP/1.1
+content-type: application/json
+
+{
+    "id": "string",
+    "name": "aaa",
+    "dateOfBirth": "1992-5-5",
+    "ssn": "123456",
+    "gender": "trans",
+    "occupation": "NPC"
+}
