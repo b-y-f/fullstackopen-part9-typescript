@@ -2,6 +2,7 @@ import { calculateBmi } from './bmiCalculator';
 import { calculateExercises } from './exerciseCalculator';
 import bodyParser from 'body-parser';
 import diagnoses from './routes/diagnoses';
+import patients from './routes/patients';
 
 import express,{ Request, Response } from 'express';
 
@@ -60,6 +61,7 @@ app.get('/api/ping', (_req:Request, res: Response) => {
 
 
 app.use('/api/diagnoses', diagnoses );
+app.use('/api/patients', patients );
 
 const PORT = 3002;
 
