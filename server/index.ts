@@ -49,6 +49,11 @@ app.post('/exercises', (req:Request, res:Response) =>{
   }
 });
 
+app.get('/ping', (_req:Request, res: Response) => {
+
+  res.json({message: 'something'})
+})
+
 
 
 const PORT = 3002;
