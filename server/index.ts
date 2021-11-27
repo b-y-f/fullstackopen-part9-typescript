@@ -1,6 +1,7 @@
 import { calculateBmi } from './bmiCalculator';
 import { calculateExercises } from './exerciseCalculator';
 import bodyParser from 'body-parser';
+import diagnoses from './routes/diagnoses';
 
 import express,{ Request, Response } from 'express';
 
@@ -52,12 +53,13 @@ app.post('/exercises', (req:Request, res:Response) =>{
   }
 });
 
-app.get('/ping', (_req:Request, res: Response) => {
+app.get('/api/ping', (_req:Request, res: Response) => {
 
   res.json({message: 'something'});
 });
 
 
+app.use('/api/diagnoses', diagnoses );
 
 const PORT = 3002;
 
