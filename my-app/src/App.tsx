@@ -1,37 +1,62 @@
-import React from 'react';
+import React from "react";
+
+const Header = ({ name }: { name: string }) => <h1>{name}</h1>;
+
+interface CoursePart {
+  name: string;
+  exerciseCount: number;
+}
+
+const Content = ({
+  courseParts,
+}: {
+  courseParts: CoursePart[];
+}): JSX.Element => (
+  <>
+    <p>
+      {courseParts[0].name} {courseParts[0].exerciseCount}
+    </p>
+    <p>
+      {courseParts[1].name} {courseParts[1].exerciseCount}
+    </p>
+    <p>
+      {courseParts[2].name} {courseParts[2].exerciseCount}
+    </p>
+  </>
+);
+
+const Total = ({ courseParts }: { courseParts: CoursePart[] }): JSX.Element => (
+  <p>
+    Number of exercises{" "}
+    {courseParts.reduce(
+      (carry: number, part: CoursePart) => carry + part.exerciseCount,
+      0
+    )}
+  </p>
+);
+
 const App = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
     {
       name: "Fundamentals",
-      exerciseCount: 10
+      exerciseCount: 10,
     },
     {
       name: "Using props to pass data",
-      exerciseCount: 7
+      exerciseCount: 7,
     },
     {
       name: "Deeper type usage",
-      exerciseCount: 14
-    }
+      exerciseCount: 14,
+    },
   ];
 
   return (
     <div>
-      <h1>{courseName}</h1>
-      <p>
-        {courseParts[0].name} {courseParts[0].exerciseCount}
-      </p>
-      <p>
-        {courseParts[1].name} {courseParts[1].exerciseCount}
-      </p>
-      <p>
-        {courseParts[2].name} {courseParts[2].exerciseCount}
-      </p>
-      <p>
-        Number of exercises{" "}
-        {courseParts.reduce((carry, part) => carry + part.exerciseCount, 0)}
-      </p>
+      <Header name={courseName} />
+      <Content courseParts={courseParts} />
+      <Total courseParts={courseParts} />
     </div>
   );
 };
