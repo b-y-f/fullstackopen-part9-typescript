@@ -2,7 +2,7 @@ import express from 'express';
 
 import patientService from '../services/patientService';
 
-import toNewPatientEntry from '../services/utils';
+import {toNewPatientEntry} from '../services/utils';
 
 const router = express.Router();
 
@@ -16,6 +16,14 @@ router.post('/', (req, res) => {
   const newPatient = patientService.addPatient(newPatientEntry);
 
   res.send(newPatient);
+
+});
+
+router.get('/:id', (req, res) => {
+  const {id} = req.params;
+  const patient = patientService.getAllInfoById(id);
+  // console.log(id);
+  res.json(patient);
 
 });
 

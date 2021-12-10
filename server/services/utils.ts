@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Gender, NewPatientEntry } from '../types';
+import {  Gender, NewPatientEntry } from '../types';
 
 const isString = (text: unknown): text is string => {
     return typeof text === 'string' || text instanceof String;
@@ -54,16 +54,16 @@ export const parseGender = (gender: unknown): Gender => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const toNewPatientEntry = (object: any): NewPatientEntry => {
+export const toNewPatientEntry = (object: any): NewPatientEntry => {
     const newEntry: NewPatientEntry = {
         name: parseName(object.name),
         dateOfBirth: parseDate(object.dateOfBirth),
         ssn: parseSsn(object.ssn),
         gender: parseGender(object.gender),
-        occupation: parseOcc(object.occupation)
+        occupation: parseOcc(object.occupation),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        entries: object.entries
     };
 
     return newEntry;
 };
-
-export default toNewPatientEntry;
