@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import { Container, Icon } from "semantic-ui-react";
 import { apiBaseUrl } from "../constants";
 import { useStateValue } from "../state";
-import { Gender, Patient } from "../types";
+import { Diagnosis, Gender, Patient } from "../types";
 
 const PatientPage = () => {
   const [{ patients }, dispatch] = useStateValue();
   const { id } = useParams<{ id: string }>();
+
+  const [diagResult, setDiagResult] = React.useState<Diagnosis[]>();
 
   const patient = patients[id];
 
@@ -19,14 +21,16 @@ const PatientPage = () => {
           `${apiBaseUrl}/patients/${id}`
         );
         dispatch({ type: "ADD_PATIENT", payload: patient });
+        const { data: diag } = await axios.get<Diagnosis[]>(
+          `${apiBaseUrl}/diagnoses`
+        );
+        setDiagResult(diag);
       } catch (error) {
         console.error(error);
       }
     };
     void fetchPatientInfo(id);
   }, []);
-
-  console.log(patient);
 
   const selectGenderIcon = (gender?: Gender): string => {
     switch (gender) {
@@ -39,18 +43,11 @@ const PatientPage = () => {
     }
   };
 
-  // const differentEntries = (entries:Entry[]):Entry[] => {
-  //   switch (entries.type) {
-  //     case 'HealthCheck':
-
-  //       break;
-  //     case 'Hospital'
-
-  //     case 'OccupationalHealthcare'
-  //     default:
-  //       break;
-  //   }
-  // }
+  const getDiagName = (code: string): string | undefined => {
+    if (diagResult !== undefined) {
+      return diagResult.find((d: Diagnosis) => d.code === code)?.name;
+    }
+  };
 
   return (
     <div className="App">
@@ -67,7 +64,9 @@ const PatientPage = () => {
             <p>{entry.description}</p>
             <ul>
               {entry?.diagnosisCodes?.map((code, i) => (
-                <li key={i}>{code}</li>
+                <li key={i}>
+                  {code} {getDiagName(code)}
+                </li>
               ))}
             </ul>
           </div>
