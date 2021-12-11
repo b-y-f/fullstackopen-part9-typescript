@@ -10,7 +10,7 @@ export const calculateBmi = (h:number, w: number) : Result => {
   return 'Obesity';
 };
 
-const height = Number(process.argv[2]);
-const weight = Number(process.argv[3]);
+// const height = Number(process.argv[2]);
+// const weight = Number(process.argv[3]);
 
-console.log(`height ${height} cm and weight ${weight} KG, result is:`, calculateBmi(height, weight));
+// console.log(`height ${height} cm and weight ${weight} KG, result is:`, calculateBmi(height, weight));

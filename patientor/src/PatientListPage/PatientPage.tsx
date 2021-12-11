@@ -24,7 +24,7 @@ const PatientPage = () => {
       }
     };
     void fetchPatientInfo(id);
-  });
+  }, []);
 
   const selectGenderIcon = (gender?: Gender): string => {
     switch (gender) {
