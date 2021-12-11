@@ -1,5 +1,5 @@
 import {v1 as uuid} from 'uuid';
-import data from '../data/patients.json';
+import data from '../data/patients';
 import {PublicPatient, NewPatientEntry, Patient} from '../types'; 
 import { parseGender } from './utils';
 
@@ -20,8 +20,8 @@ const addPatient = (p:NewPatientEntry): Patient => {
 };
 
 const getAllInfoById = (id:string):Patient|undefined => {
-  const patients = data.map(({id, name, ssn, dateOfBirth, gender, occupation})=>({
-    id, name, ssn, dateOfBirth,gender:parseGender(gender), occupation, entries:[]
+  const patients = data.map(({id, name, ssn, dateOfBirth, gender, occupation, entries})=>({
+    id, name, ssn, dateOfBirth,gender:parseGender(gender), occupation, entries
   }));
   return patients.find(i=>i.id===id);
 };
