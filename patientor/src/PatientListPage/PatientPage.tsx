@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Container, Icon } from "semantic-ui-react";
+import { Container, Divider, Header, Icon, Segment } from "semantic-ui-react";
 import { apiBaseUrl } from "../constants";
 import { useStateValue } from "../state";
-import { Diagnosis, Gender, Patient } from "../types";
+import { Diagnosis, Entry, Gender, Patient } from "../types";
+import { EntryDetails } from "./EntryDetails";
 
 const PatientPage = () => {
   const [{ patients }, dispatch] = useStateValue();
@@ -60,16 +62,19 @@ const PatientPage = () => {
         <p>occupation: {patient?.occupation}</p>
         <h2>entries</h2>
         {patient?.entries?.map((entry, i) => (
-          <div key={i}>
-            <p>{entry.description}</p>
-            <ul>
-              {entry?.diagnosisCodes?.map((code, i) => (
-                <li key={i}>
-                  {code} {getDiagName(code)}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Segment key={i}>
+            <EntryDetails entry={entry} />
+          </Segment>
+          // <div key={i}>
+          //   <p>{entry.description}</p>
+          //   <ul>
+          //     {entry?.diagnosisCodes?.map((code, i) => (
+          //       <li key={i}>
+          //         {code} {getDiagName(code)}
+          //       </li>
+          //     ))}
+          //   </ul>
+          // </div>
         ))}
       </Container>
     </div>
