@@ -26,6 +26,8 @@ const PatientPage = () => {
     void fetchPatientInfo(id);
   }, []);
 
+  console.log(patient);
+
   const selectGenderIcon = (gender?: Gender): string => {
     switch (gender) {
       case "female":
@@ -37,6 +39,19 @@ const PatientPage = () => {
     }
   };
 
+  // const differentEntries = (entries:Entry[]):Entry[] => {
+  //   switch (entries.type) {
+  //     case 'HealthCheck':
+
+  //       break;
+  //     case 'Hospital'
+
+  //     case 'OccupationalHealthcare'
+  //     default:
+  //       break;
+  //   }
+  // }
+
   return (
     <div className="App">
       <Container>
@@ -46,6 +61,17 @@ const PatientPage = () => {
         </h2>
         <p>ssn: {patient?.ssn}</p>
         <p>occupation: {patient?.occupation}</p>
+        <h2>entries</h2>
+        {patient?.entries?.map((entry, i) => (
+          <div key={i}>
+            <p>{entry.description}</p>
+            <ul>
+              {entry?.diagnosisCodes?.map((code, i) => (
+                <li key={i}>{code}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </Container>
     </div>
   );
