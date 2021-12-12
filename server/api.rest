@@ -29,3 +29,20 @@ content-type: application/json
     "gender": "female",
     "occupation": "NPC"
 }
+
+### post to entry
+POST http://localhost:3002/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries
+content-type: application/json
+
+{
+  "date": "2020-01-02",
+  "type": "Hospital",
+  "specialist": "sdfdsfewf",
+  "diagnosisCodes": ["S62.5"],
+  "description":
+    "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
+  "discharge": {
+    "date": "2021-01-02",
+    "criteria": "Thumb has healed."
+  }
+}
