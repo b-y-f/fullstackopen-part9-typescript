@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
 router.post("/:id/entries", (req, res) => {
   const patient = patientService.getAllInfoById(req.params.id);
   if (patient) {
-    res.json(patient);
+    res.json(req.body);
   }
 });
 

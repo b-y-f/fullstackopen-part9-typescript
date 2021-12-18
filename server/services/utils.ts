@@ -78,21 +78,14 @@ type Field = {
   entries: unknown;
 };
 
-export const toNewPatientEntry = ({
-  name,
-  dateOfBirth,
-  ssn,
-  gender,
-  occupation,
-  entries,
-}: Field): NewPatient => {
+export const toNewPatientEntry = (obj: Field): NewPatient => {
   const newEntry: NewPatient = {
-    name: parseName(name),
-    dateOfBirth: parseDate(dateOfBirth),
-    ssn: parseSsn(ssn),
-    gender: parseGender(gender),
-    occupation: parseOcc(occupation),
-    entries: parseEnties(entries),
+    name: parseName(obj.name),
+    dateOfBirth: parseDate(obj.dateOfBirth),
+    ssn: parseSsn(obj.ssn),
+    gender: parseGender(obj.gender),
+    occupation: parseOcc(obj.occupation),
+    entries: parseEnties(obj.entries),
   };
 
   return newEntry;

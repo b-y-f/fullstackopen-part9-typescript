@@ -1,0 +1,11 @@
+version: '1.0'
+
+services:
+  backend:
+    build: ./server
+    ports:
+      - 3002:3002
+  frontend:
+    build: ./patientor
+    ports:
+      - 3000:3000
