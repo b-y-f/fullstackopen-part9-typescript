@@ -5,13 +5,6 @@ const isString = (text: unknown): text is string => {
   return typeof text === "string" || text instanceof String;
 };
 
-// const parseString = (str: unknown): string => {
-//   if (!str || !isString(str)) {
-//     throw new Error("Incorrect or missing string");
-//   }
-//   return str;
-// };
-
 const parseName = (name: unknown): string => {
   if (!name || !isString(name)) {
     throw new Error("Incorrect or missing name");
@@ -48,6 +41,7 @@ const parseDate = (date: unknown): string => {
 };
 
 const isGender = (param: any): param is Gender => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return Object.values(Gender).includes(param);
 };
 
@@ -78,8 +72,8 @@ type Field = {
   entries: unknown;
 };
 
-export const toNewPatientEntry = (obj: Field): NewPatient => {
-  const newEntry: NewPatient = {
+export const toNewPatient = (obj: Field): NewPatient => {
+  const newPatient: NewPatient = {
     name: parseName(obj.name),
     dateOfBirth: parseDate(obj.dateOfBirth),
     ssn: parseSsn(obj.ssn),
@@ -88,5 +82,5 @@ export const toNewPatientEntry = (obj: Field): NewPatient => {
     entries: parseEnties(obj.entries),
   };
 
-  return newEntry;
+  return newPatient;
 };
