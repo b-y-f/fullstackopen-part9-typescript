@@ -8,6 +8,7 @@ import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
 import HealthRatingBar from "../components/HealthRatingBar";
 import { addPatient, useStateValue } from "../state";
+import { useHistory } from "react-router-dom";
 
 const PatientListPage = () => {
   const [{ patients }, dispatch] = useStateValue();
@@ -20,6 +21,11 @@ const PatientListPage = () => {
   const closeModal = (): void => {
     setModalOpen(false);
     setError(undefined);
+  };
+
+  const history = useHistory();
+  const handleLinkToPage = (id: string): void => {
+    history.push(`/patients/${String(id)}`);
   };
 
   const submitNewPatient = async (values: PatientFormValues) => {
@@ -52,7 +58,10 @@ const PatientListPage = () => {
         </Table.Header>
         <Table.Body>
           {Object.values(patients).map((patient?: Patient) => (
-            <Table.Row key={patient?.id}>
+            <Table.Row
+              key={patient?.id}
+              onClick={() => handleLinkToPage(String(patient?.id))}
+            >
               <Table.Cell>{patient?.name}</Table.Cell>
               <Table.Cell>{patient?.gender}</Table.Cell>
               <Table.Cell>{patient?.occupation}</Table.Cell>
