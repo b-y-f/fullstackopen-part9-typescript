@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, Button } from "semantic-ui-react";
 import { Field, Formik, Form } from "formik";
 
-import { TextField, SelectField, GenderOption } from "./FormField";
-import { Gender, Patient } from "../types";
+import { TextField } from "./FormField";
+import { Entry, Patient } from "../types";
 
 /*
  * use type Patient, but omit id and entries,
@@ -12,44 +12,27 @@ import { Gender, Patient } from "../types";
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
 
 interface Props {
-  onSubmit: (values: PatientFormValues) => void;
+  onSubmit: (values: Entry) => void;
   onCancel: () => void;
 }
 
-const genderOptions: GenderOption[] = [
-  { value: Gender.Male, label: "Male" },
-  { value: Gender.Female, label: "Female" },
-  { value: Gender.Other, label: "Other" },
-];
-
-export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
+export const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
   return (
     <Formik
       initialValues={{
-        name: "",
-        ssn: "",
-        dateOfBirth: "",
-        occupation: "",
-        gender: Gender.Other,
+        date: "",
+        type: "Hospital",
+        specialist: "",
+        diagnosisCodes: [],
+        description: "",
+        discharge: {
+          date: "",
+          criteria: "",
+        },
+        sickLeave: "",
+        employerName: "",
       }}
       onSubmit={onSubmit}
-      validate={(values) => {
-        const requiredError = "Field is required";
-        const errors: { [field: string]: string } = {};
-        if (!values.name) {
-          errors.name = requiredError;
-        }
-        if (!values.ssn) {
-          errors.ssn = requiredError;
-        }
-        if (!values.dateOfBirth) {
-          errors.dateOfBirth = requiredError;
-        }
-        if (!values.occupation) {
-          errors.occupation = requiredError;
-        }
-        return errors;
-      }}
     >
       {({ isValid, dirty }) => {
         return (
@@ -78,7 +61,6 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
               name="occupation"
               component={TextField}
             />
-            <SelectField label="Gender" name="gender" options={genderOptions} />
             <Grid>
               <Grid.Column floated="left" width={5}>
                 <Button type="button" onClick={onCancel} color="red">
@@ -102,5 +84,3 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
     </Formik>
   );
 };
-
-export default AddPatientForm;
